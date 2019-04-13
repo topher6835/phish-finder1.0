@@ -3,12 +3,14 @@ package com.dev.phishfinder.web;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dev.phishfinder.model.Show;
+import com.dev.phishfinder.model.ShowData;
 import com.dev.phishfinder.model.Track;
 import com.dev.phishfinder.service.ShowRepository;
 import com.dev.phishfinder.service.TrackRepository;
@@ -23,12 +25,12 @@ public class ShowController {
 	private TrackRepository trackRepository;
 	
 	@GetMapping("/show/year/{yearId}")
-	public List<Show> getShowsByYear(@PathVariable String yearId) {
+	public ResponseEntity<?> getShowsByYear(@PathVariable String yearId) {
 		return showRepository.getShowsByYear(yearId);
 	}
 	
 	@GetMapping("/show/id/{showId}")
-	public Show getShowById(@PathVariable Long showId) {
+	public ShowData getShowById(@PathVariable Long showId) {
 		return showRepository.getShowById(showId);
 	}
 	

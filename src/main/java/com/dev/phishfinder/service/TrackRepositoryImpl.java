@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.dev.phishfinder.model.Show;
+import com.dev.phishfinder.model.ShowData;
 import com.dev.phishfinder.model.Track;
 import com.dev.phishfinder.model.TrackData;
 import com.dev.phishfinder.model.Tracks;
@@ -55,9 +56,9 @@ public class TrackRepositoryImpl implements TrackRepository {
 		System.out.println("/n--> getTracksByShow(" +  tracksShowId +")");
 		
 		// find show and return tracks
-		Show theShow = showRepository.getShowById(tracksShowId);
+		ShowData theShow = showRepository.getShowById(tracksShowId);
 		
-		return theShow.getTracks();
+		return theShow.getShow().getTracks();
 	}
 	
 	@Override

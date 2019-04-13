@@ -1,8 +1,6 @@
 package com.dev.phishfinder.service;
 
 import java.util.Date;
-import java.util.List;
-
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpEntity;
@@ -12,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import com.dev.phishfinder.model.Year;
+import com.dev.phishfinder.model.Years;
 
 @Component
 public class YearRepositoryImpl implements YearRepository {
@@ -23,16 +21,19 @@ public class YearRepositoryImpl implements YearRepository {
 	
 	@Override
 	@Cacheable("getYears")
-	public List<String> getYears() {
+	public ResponseEntity<Years> getYears() {
+		System.out.println("getYears repo");
+		
 		RestTemplate restTemplate = new RestTemplate();
 		HttpHeaders requestHeaders = new HttpHeaders();
 		requestHeaders.setBearerAuth(bearerToken);
 		HttpEntity<?> httpEntity = new HttpEntity<Object>(requestHeaders);
 		
-		ResponseEntity<Year> yearsList = 
-				restTemplate.exchange(phishinEndpointUrl + "years", HttpMethod.GET, httpEntity, Year.class);
-		
-		return yearsList.getBody().getYears();
+		ResponseEntity<Years> yearsList = 
+				restTemplate.exchange(phishinEndpointUrl + "years", HttpMethod.GET, httpEntity, Years.class);	
+
+		//yearsList.getBody().setStatusCode(yearsList.getStatusCodeValue());
+		return yearsList; //yearsList.getBody();
 	}
 	
 	@Override

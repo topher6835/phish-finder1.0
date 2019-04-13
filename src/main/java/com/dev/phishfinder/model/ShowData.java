@@ -11,6 +11,10 @@ public class ShowData {
 
 	public ShowData() {
 	}
+	
+	public ShowData(Show show) {
+		this.show = show;
+	}
 
 	public Show getShow() {
 		return show;

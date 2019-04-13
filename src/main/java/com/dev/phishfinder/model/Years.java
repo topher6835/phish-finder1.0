@@ -2,45 +2,40 @@ package com.dev.phishfinder.model;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-//@Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Years {
 	
-	//@Id
-	@JsonAlias("data")
-	private int id;
-	
-	//@ElementCollection()
-	//@JsonAlias("data")
-	private List<Year> yearsList;
+	//@JsonProperty("status")
+	//private int statusCode;
+
+	@JsonProperty("data")
+	private List<String> yearsList;
 	
 	public Years() {
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	@JsonProperty("data")
-	public List<Year> getYears() {
+	public List<String> getYearsList() {
 		return yearsList;
 	}
 
-	public void setYears(List<Year> yearsList) {
+	public void setYearsList(List<String> yearsList) {
 		this.yearsList = yearsList;
 	}
 
+//	public int getStatusCode() {
+//		return statusCode;
+//	}
+//
+//	public void setStatusCode(int statusCode) {
+//		this.statusCode = statusCode;
+//	}
+
 	@Override
 	public String toString() {
-		return "Years [id=" + id + ", years=" + yearsList + "]";
+		return "Years [yearsList=" + yearsList + "]";
 	}
 	
 }

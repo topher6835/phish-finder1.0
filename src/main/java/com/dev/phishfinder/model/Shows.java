@@ -9,12 +9,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Shows {
-
-	private Long id;
 	
 	private String yearId;
 	
-	@JsonAlias("data")
+	@JsonProperty("data")
 	private List<Show> showsList;
 	
 	public Shows() {
@@ -22,14 +20,6 @@ public class Shows {
 	
 	public Shows(String yearId) {
 		this.yearId = yearId;
-	}
-
-	public Long getId() {
-		return id;
-	}
-	
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getYearId() {
@@ -51,7 +41,7 @@ public class Shows {
 
 	@Override
 	public String toString() {
-		return "Shows [id=" + id + ", yearId=" + yearId + ", showsList=" + showsList + "]";
+		return "Shows [yearId=" + yearId + ", showsList=" + showsList + "]";
 	}
 
 }

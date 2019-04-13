@@ -1,10 +1,12 @@
 package com.dev.phishfinder.service;
 
-import java.util.List;
+import org.springframework.http.ResponseEntity;
+
+import com.dev.phishfinder.model.Years;
 
 public interface YearRepository {
 
-	List<String> getYears();
+	ResponseEntity<Years> getYears();
 
 	void reportCacheEvict();
 	

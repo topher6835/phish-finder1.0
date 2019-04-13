@@ -31,7 +31,7 @@ public class ShowRepositoryImpl implements ShowRepository {
 
 	@Override
 	@Cacheable(cacheNames="shows", key="#yearId")
-	public List<Show> getShowsByYear(String yearId) {
+	public ResponseEntity<?> getShowsByYear(String yearId) {	//List<Show>
 		System.out.println("getShowsByYear repo");
 		
 		RestTemplate restTemplate = new RestTemplate();
@@ -42,28 +42,39 @@ public class ShowRepositoryImpl implements ShowRepository {
 		ResponseEntity<Shows> showsList = 
 				restTemplate.exchange(phishinEndpointUrl + "years/" + yearId, 
 						HttpMethod.GET, httpEntity, Shows.class);	
-		
-		for(Show theShow : showsList.getBody().getShowsList()) {	
+		showsList.getBody().setYearId(yearId);
+		for(Show theShow : showsList.getBody().getShowsList()) {
+			theShow.setYearId(yearId);
 			showRepository.setShowById(theShow.getId(), theShow);	
 			trackRepository.setTracksByShow(theShow.getId(), theShow.getTracks());
 		}
 		
-		return showsList.getBody().getShowsList();
+		return showsList;   // showsList.getBody().getShowsList();
 	}
 	
 	@Override
 	@Cacheable(cacheNames="show", key="#showId")
-	public Show setShowById(Long showId, Show theShow) {
+	public ShowData setShowById(Long showId, Show theShow) {
 		System.out.println("/n--> setShow(" + showId + ", xx)");
 		
-		Show newShow = new Show(theShow);
+		ShowData newShow = new ShowData(theShow);
 		
 		return newShow;
 	}
+	
+//	@Override
+//	@Cacheable(cacheNames="show", key="#showId")
+//	public Show setShowById(Long showId, Show theShow) {
+//		System.out.println("/n--> setShow(" + showId + ", xx)");
+//		
+//		Show newShow = new Show(theShow);
+//		
+//		return newShow;
+//	}
 
 	@Override
 	@Cacheable(cacheNames="show", key="#showId")
-	public Show getShowById(Long showId) {
+	public ShowData getShowById(Long showId) {
 		System.out.println("/n--> getShowById(" + showId + ")");
 		
 		RestTemplate restTemplate = new RestTemplate();
@@ -78,7 +89,7 @@ public class ShowRepositoryImpl implements ShowRepository {
 
 		trackRepository.setTracksByShow(showId, theShow.getTracks());
 		
-		return theShow;
+		return show.getBody();
 	}
 
 	@Override

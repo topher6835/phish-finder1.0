@@ -2,15 +2,18 @@ package com.dev.phishfinder.service;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+
 import com.dev.phishfinder.model.Show;
+import com.dev.phishfinder.model.ShowData;
 
 public interface ShowRepository {
 
-	public List<Show> getShowsByYear(String yearId);
+	public ResponseEntity<?> getShowsByYear(String yearId);
 	
-	public Show setShowById(Long showId, Show theShow);
+	public ShowData setShowById(Long showId, Show theShow);
 	
-	public Show getShowById(Long showId);
+	public ShowData getShowById(Long showId);
 
 	public void reportCacheEvict();
 
