@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dev.phishfinder.model.Show;
 import com.dev.phishfinder.model.ShowData;
 import com.dev.phishfinder.model.Track;
 import com.dev.phishfinder.service.ShowRepository;
