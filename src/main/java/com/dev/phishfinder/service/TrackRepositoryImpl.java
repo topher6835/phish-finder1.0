@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpEntity;
@@ -25,9 +26,10 @@ public class TrackRepositoryImpl implements TrackRepository {
 	@Autowired
 	ShowRepository showRepository;
 	
-	private String bearerToken = 
-			"4c0c969e2f383ceb7b4dad242e5e8a210b30635c394867ebe5963c646ee3f7e5df53f0cda2a003e8238a28a211b820d5";
-	private String phishinEndpointUrl = "https://phish.in/api/v1/";
+	@Value("${bearerToken}")
+	private String bearerToken;
+	@Value("${phishinEndpoint}")
+	private String phishinEndpointUrl;
 
 	@Override
 	@Cacheable(cacheNames="track", key="#trackId")
