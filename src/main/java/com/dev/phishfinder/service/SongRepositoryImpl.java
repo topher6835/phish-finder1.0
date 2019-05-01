@@ -25,12 +25,14 @@ public class SongRepositoryImpl implements SongRepository {
 	@Override
 	@Cacheable(cacheNames="song", key="#songId")
 	public SongData getSongById(Long songId) {
-		System.out.println("getSongById repo");
+		System.out.println("getSongById repo(" + songId + ")");
 		
 		RestTemplate restTemplate = new RestTemplate();
 		
 		HttpHeaders requestHeaders = new HttpHeaders();
 		requestHeaders.setBearerAuth(bearerToken);
+		requestHeaders.add("Content-Type", "application/json");
+		requestHeaders.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
 		HttpEntity<?> httpEntity = new HttpEntity<Object>(requestHeaders);
 		
 		ResponseEntity<SongData> song = 

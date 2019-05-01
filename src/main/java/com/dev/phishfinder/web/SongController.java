@@ -20,5 +20,10 @@ public class SongController {
 	public SongData getSongById(@PathVariable Long songId) {
 		return songRepository.getSongById(songId);
 	}
+	
+	@GetMapping("/evictSongs")
+	public void evictSongs() {
+		songRepository.reportCacheEvict();
+	}
 
 }

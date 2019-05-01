@@ -30,6 +30,8 @@ public class YearRepositoryImpl implements YearRepository {
 		RestTemplate restTemplate = new RestTemplate();
 		HttpHeaders requestHeaders = new HttpHeaders();
 		requestHeaders.setBearerAuth(bearerToken);
+		requestHeaders.add("Content-Type", "application/json");
+		requestHeaders.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
 		HttpEntity<?> httpEntity = new HttpEntity<Object>(requestHeaders);
 		
 		ResponseEntity<Years> yearsList = 
@@ -43,6 +45,10 @@ public class YearRepositoryImpl implements YearRepository {
 	@CacheEvict(allEntries = true, value = {"getYears"})
 	public void reportCacheEvict() {
 		System.out.println("Flush Years Cache " + new Date() );
+	}
+	
+	public void testEvict() {
+		System.out.println("test evict.");
 	}
 	
 //    private void simulateSlowService() {

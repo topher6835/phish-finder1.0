@@ -14,19 +14,18 @@ import com.dev.phishfinder.service.YearRepository;
 @RestController
 @RequestMapping("/api")
 public class YearController {
-	
 	//private final Logger log = LoggerFactory.getLogger(YearController.class);
 	
 	@Autowired
 	private YearRepository yearRepository;
 	
 	@GetMapping("/getYears")
-	ResponseEntity<Years> getYears() {	
+	public ResponseEntity<Years> getYears() {	
 		return yearRepository.getYears();	
 	}
 	
 	@GetMapping("/evictYears")
-	void evictYears() {	
+	public void evictYears() {	
 		yearRepository.reportCacheEvict();	
 	}
 

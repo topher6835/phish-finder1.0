@@ -39,7 +39,7 @@ public class ShowController {
 	}
 	
 	@GetMapping("/evictShows")
-	void evictYears() {	
+	public void evictYears() {	
 		showRepository.reportCacheEvict();	
 	}
 

@@ -37,6 +37,8 @@ public class ShowRepositoryImpl implements ShowRepository {
 		RestTemplate restTemplate = new RestTemplate();
 		HttpHeaders requestHeaders = new HttpHeaders();
 		requestHeaders.setBearerAuth(bearerToken);
+		requestHeaders.add("Content-Type", "application/json");
+		requestHeaders.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
 		HttpEntity<?> httpEntity = new HttpEntity<Object>(requestHeaders);
 		
 		ResponseEntity<Shows> showsList = 
@@ -49,37 +51,29 @@ public class ShowRepositoryImpl implements ShowRepository {
 			trackRepository.setTracksByShow(theShow.getId(), theShow.getTracks());
 		}
 		
-		return showsList;   // showsList.getBody().getShowsList();
+		return showsList;
 	}
 	
 	@Override
 	@Cacheable(cacheNames="show", key="#showId")
 	public ShowData setShowById(Long showId, Show theShow) {
-		System.out.println("/n--> setShow(" + showId + ", xx)");
+		System.out.println("--> setShow(" + showId + ")");
 		
 		ShowData newShow = new ShowData(theShow);
 		
 		return newShow;
 	}
-	
-//	@Override
-//	@Cacheable(cacheNames="show", key="#showId")
-//	public Show setShowById(Long showId, Show theShow) {
-//		System.out.println("/n--> setShow(" + showId + ", xx)");
-//		
-//		Show newShow = new Show(theShow);
-//		
-//		return newShow;
-//	}
 
 	@Override
 	@Cacheable(cacheNames="show", key="#showId")
 	public ShowData getShowById(Long showId) {
-		System.out.println("/n--> getShowById(" + showId + ")");
+		System.out.println("--> getShowById(" + showId + ")");
 		
 		RestTemplate restTemplate = new RestTemplate();
 		HttpHeaders requestHeaders = new HttpHeaders();
 		requestHeaders.setBearerAuth(bearerToken);
+		requestHeaders.add("Content-Type", "application/json");
+		requestHeaders.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
 		HttpEntity<?> httpEntity = new HttpEntity<Object>(requestHeaders);
 		
 		ResponseEntity<ShowData> show = 
