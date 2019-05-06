@@ -93,5 +93,3 @@ public class ShowRepositoryImpl implements ShowRepository {
 	}
 
 }
-
-
